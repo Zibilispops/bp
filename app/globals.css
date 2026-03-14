@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-white font-mono;
+  }
+
+  ::selection {
+    @apply bg-neon-green text-black;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-mono;
+  }
+
+  a {
+    @apply transition-colors duration-150;
+  }
+}
+
+@layer components {
+  /* ---- Buttons ---- */
+  .btn-primary {
+    @apply px-6 py-3 bg-neon-green text-black font-mono font-bold uppercase
+           tracking-widest text-sm cursor-pointer
+           hover:bg-warn-orange hover:text-white
+           transition-colors duration-150
+           border border-neon-green
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply px-6 py-3 border border-white/30 text-white font-mono uppercase
+           tracking-widest text-sm cursor-pointer
+           hover:border-neon-green hover:text-neon-green
+           transition-colors duration-150;
+  }
+
+  .btn-danger {
+    @apply px-4 py-2 border border-warn-orange/50 text-warn-orange font-mono
+           uppercase tracking-widest text-xs cursor-pointer
+           hover:bg-warn-orange hover:text-black
+           transition-colors duration-150;
+  }
+
+  /* ---- Cards ---- */
+  .product-card {
+    @apply border border-white/10 bg-black
+           hover:border-neon-green
+           transition-colors duration-200;
+  }
+
+  /* ---- Glitch text (pseudo-element layer approach) ---- */
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .glitch-text:hover::before {
+    color: #00FFFF;
+    opacity: 0.7;
+    animation: glitch-clip-1 0.5s infinite linear alternate-reverse;
+    transform: translate(-2px, 0);
+  }
+
+  .glitch-text:hover::after {
+    color: #FF00FF;
+    opacity: 0.7;
+    animation: glitch-clip-2 0.5s infinite linear alternate-reverse;
+    transform: translate(2px, 0);
+  }
+
+  /* ---- Scanlines overlay ---- */
+  .scanlines {
+    position: relative;
+  }
+
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.04) 2px,
+      rgba(0, 0, 0, 0.04) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ---- Noise texture overlay ---- */
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ---- Table cells ---- */
+  .admin-table th {
+    @apply text-left py-3 px-4 text-white/40 text-xs uppercase tracking-widest font-mono border-b border-white/10;
+  }
+
+  .admin-table td {
+    @apply py-3 px-4 text-sm border-b border-white/5 font-mono;
+  }
+
+  .admin-table tr:hover td {
+    @apply bg-white/[0.02];
+  }
+
+  /* ---- Status badges ---- */
+  .badge-pending {
+    @apply text-xs uppercase tracking-widest px-2 py-0.5 border border-warn-orange text-warn-orange;
+  }
+
+  .badge-printed {
+    @apply text-xs uppercase tracking-widest px-2 py-0.5 border border-neon-green text-neon-green;
+  }
+}
+
+/* ---- Scrollbar styling ---- */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #39FF1440;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #39FF14;
+}
