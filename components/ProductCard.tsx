@@ -60,7 +60,7 @@ export default function ProductCard({ item }: ProductCardProps) {
     available: (sizeStock[s] ?? 0) > 0,
   }))
   const hasAnyWhite = sizes.some(s => s.available)
-  const checkoutUrl = getCheckoutUrl(item.item_id)
+  const checkoutUrl = getCheckoutUrl(item.item_id, process.env.NEXT_PUBLIC_BASE_STORE_NAME ?? '')
 
   const primaryImage = item.images[0]?.url ?? ''
 
